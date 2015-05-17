@@ -8,12 +8,14 @@
 
 import UIKit
 
-class SentMemesTableViewController: UIViewController {
+class SentMemesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var memesTableView: UITableView!
     
     var memes: [Meme]!
+    
+    let cellIdentifier: String = "MemeTableViewCell"
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
@@ -49,6 +51,23 @@ class SentMemesTableViewController: UIViewController {
             emptyLabel.hidden = true
         }
         
+    }
+    
+    // MARK: - Table View and Data Source Delegates
+    
+    // The delegate properties are linked in the storyboard.
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return memes.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! UITableViewCell
+        let meme = memes[indexPath.row]
+        
+        cell.textLabel?.text = meme.topText + "..." + meme.bottomText
+        
+        return cell
     }
 
     /*
