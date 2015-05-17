@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesCollectionViewController: UIViewController, UICollectionViewDataSource {
+class SentMemesCollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var memesCollectionView: UICollectionView!
@@ -52,6 +52,19 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
             
             return cell
     }
+    
+    // MARK: - Collection View Delegate
+    
+    // The delegate property is linked in the storyboard.
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")
+            as! MemeDetailViewController
+        
+        detailController.meme = memes[indexPath.row]
+        self.navigationController!.pushViewController(detailController, animated: true)
+    }
+    
     
     /*
     // MARK: - Navigation

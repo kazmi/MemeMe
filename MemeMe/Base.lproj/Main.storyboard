@@ -106,6 +106,32 @@
             </objects>
             <point key="canvasLocation" x="655" y="-219"/>
         </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="d30-WX-06w">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="xh4-v3-tL9" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rZc-0T-yd1"/>
+                        <viewControllerLayoutGuide type="bottom" id="WtO-Ur-JMB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TOq-V3-BCI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qHk-eS-gIc">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="memedImageView" destination="qHk-eS-gIc" id="vC2-9D-miD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdu-hk-Odi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1451" y="179"/>
+        </scene>
         <!--Sent Memes-->
         <scene sceneID="YLU-tG-vpo">
             <objects>
@@ -151,6 +177,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="RDC-ja-7nr" id="E7d-MN-rh2"/>
+                                    <outlet property="delegate" destination="RDC-ja-7nr" id="4rV-Ik-w4b"/>
                                 </connections>
                             </collectionView>
                         </subviews>
