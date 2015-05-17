@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesCollectionViewController: UIViewController {
+class SentMemesCollectionViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var memesCollectionView: UICollectionView!
@@ -34,6 +34,23 @@ class SentMemesCollectionViewController: UIViewController {
             emptyLabel.hidden = true
         }
 
+    }
+    
+    // MARK: - Collection View Data Source Delegate
+    
+    // The delegate property is linked in the storyboard.
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return memes.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath)
+        -> UICollectionViewCell {
+        
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier,
+                forIndexPath: indexPath) as! UICollectionViewCell
+            
+            return cell
     }
     
     /*
