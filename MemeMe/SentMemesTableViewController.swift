@@ -50,6 +50,8 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
             memesTableView.hidden = false
             emptyLabel.hidden = true
             
+            memesTableView.rowHeight = 132.0
+            memesTableView.estimatedRowHeight = 132.0
             memesTableView.reloadData()
         }
         
@@ -64,10 +66,11 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! MemeTableViewCell
         let meme = memes[indexPath.row]
         
-        cell.textLabel?.text = meme.topText + "..." + meme.bottomText
+        cell.memedImageView?.image = meme.memedImage
+        cell.memeTextLabel?.text = meme.topText + "..." + meme.bottomText
         
         return cell
     }
