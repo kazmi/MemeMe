@@ -146,10 +146,18 @@ class MemeEditorViewController: UIViewController,
     
     // MARK: - Meme Generation and Sharing
     
+    func saveMemeAfterSharing(activity: String!, completed: Bool, items: [AnyObject]!, error: NSError!) {
+        if completed {
+            self.save()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
     @IBAction func share(sender: AnyObject) {
         
         self.memedImage = generateMemedImage()
         let activityViewController = UIActivityViewController(activityItems: [memedImage!], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = saveMemeAfterSharing
         self.presentViewController(activityViewController, animated: true, completion: nil)
     }
     
@@ -169,5 +177,19 @@ class MemeEditorViewController: UIViewController,
         
         return memedImage
     }
+    
+    func save() {
+
+        var meme = Meme(topText: topTextField.text,
+            bottomText: bottomTextField.text,
+            image: memeImageView.image!,
+            memedImage: memedImage!)
+        
+        // shared model
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.memes.append(meme)
+        
+    }
+
 
 }

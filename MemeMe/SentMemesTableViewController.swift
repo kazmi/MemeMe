@@ -49,6 +49,8 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         } else {
             memesTableView.hidden = false
             emptyLabel.hidden = true
+            
+            memesTableView.reloadData()
         }
         
     }
