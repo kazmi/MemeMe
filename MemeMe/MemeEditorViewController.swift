@@ -12,7 +12,28 @@ class MemeEditorViewController: UIViewController,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var memeImageView: UIImageView!
+    @IBOutlet weak var topTextField: UITextField!
+    @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let alignment: NSTextAlignment = NSTextAlignment.Center
+        
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName: UIColor.blackColor(),
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSStrokeWidthAttributeName: -3.0
+        ]
+        
+        topTextField.defaultTextAttributes = memeTextAttributes
+        topTextField.textAlignment = alignment
+        bottomTextField.defaultTextAttributes = memeTextAttributes
+        bottomTextField.textAlignment = alignment
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

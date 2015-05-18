@@ -146,16 +146,32 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="4Cu-4l-DgI"/>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-CC-PWM" userLabel="Top Text Field">
+                                <rect key="frame" x="16" y="100" width="568" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uud-wE-QRa" userLabel="Bottom Text Field">
+                                <rect key="frame" x="16" y="455" width="568" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="C7z-dz-cx9" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="0dI-NV-hIO"/>
                             <constraint firstItem="4pG-lM-e1e" firstAttribute="top" secondItem="JnO-FQ-dAH" secondAttribute="top" id="1YR-cn-XWM"/>
+                            <constraint firstItem="Uud-wE-QRa" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" constant="16" id="6cq-OM-RDp"/>
+                            <constraint firstAttribute="trailing" secondItem="Uud-wE-QRa" secondAttribute="trailing" constant="16" id="BGV-rL-0Tq"/>
                             <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="4pG-lM-e1e" secondAttribute="bottom" id="GIH-YH-FKD"/>
+                            <constraint firstAttribute="trailing" secondItem="Y2t-CC-PWM" secondAttribute="trailing" constant="16" id="JNn-rK-9U8"/>
                             <constraint firstAttribute="trailing" secondItem="C7z-dz-cx9" secondAttribute="trailing" id="LEK-vd-6JX"/>
                             <constraint firstAttribute="trailing" secondItem="4pG-lM-e1e" secondAttribute="trailing" id="Nac-r4-jUw"/>
+                            <constraint firstItem="Y2t-CC-PWM" firstAttribute="top" secondItem="3o3-yx-dTl" secondAttribute="bottom" constant="36" id="e8w-2l-gPS"/>
                             <constraint firstItem="4pG-lM-e1e" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="eIC-eX-nQH"/>
+                            <constraint firstItem="C7z-dz-cx9" firstAttribute="top" secondItem="Uud-wE-QRa" secondAttribute="bottom" constant="35" id="eY0-iZ-bnD"/>
                             <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="C7z-dz-cx9" secondAttribute="bottom" id="pUz-hI-HMg"/>
+                            <constraint firstItem="Y2t-CC-PWM" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" constant="16" id="qpl-CV-MNh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XxT-jc-z5S">
@@ -167,8 +183,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomTextField" destination="Uud-wE-QRa" id="3Zs-Hd-HQm"/>
                         <outlet property="cameraButton" destination="0cb-xS-dzt" id="shX-XZ-dn9"/>
                         <outlet property="memeImageView" destination="4pG-lM-e1e" id="IJw-o5-uFI"/>
+                        <outlet property="topTextField" destination="Y2t-CC-PWM" id="s84-qg-VZX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-qr-i6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
