@@ -108,6 +108,14 @@ class MemeEditorViewController: UIViewController,
     // MARK: - Text Field Delegate and Notifications
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField.text == "") {
+            if textField == topTextField {
+                textField.text = topTextFieldDefaultText
+            } else {
+                textField.text = bottomTextFieldDefaultText
+            }
+        }
+        
         textField.resignFirstResponder()
         return true
     }
