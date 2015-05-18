@@ -8,10 +8,18 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController {
+class MemeEditorViewController: UIViewController,
+    UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var memeImageView: UIImageView!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.Camera)
+        
         self.tabBarController?.tabBar.hidden = true;
     }
     
@@ -22,6 +30,38 @@ class MemeEditorViewController: UIViewController {
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         self.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    // MARK: - Pick An Image
+    
+    @IBAction func pickAnImageFromAlbum(sender: AnyObject) {
+        pickAnImageFromSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
+    }
+    
+    @IBAction func pickAnImageFromCamera(sender: AnyObject) {
+        pickAnImageFromSourceType(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    func pickAnImageFromSourceType(sourceType: UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    // MARK: - Image Picker Controller Delegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.memeImageView.image = image
+        }
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }

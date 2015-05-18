@@ -123,7 +123,40 @@
                     <view key="view" contentMode="scaleToFill" id="JnO-FQ-dAH">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4pG-lM-e1e">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7z-dz-cx9">
+                                <rect key="frame" x="0.0" y="507" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rQB-06-6oZ"/>
+                                    <barButtonItem enabled="NO" systemItem="camera" id="0cb-xS-dzt">
+                                        <connections>
+                                            <action selector="pickAnImageFromCamera:" destination="G4w-Bx-zDY" id="s01-Yq-kr4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="M2t-Ne-sMB"/>
+                                    <barButtonItem title="Album" id="IaR-dS-7eD">
+                                        <connections>
+                                            <action selector="pickAnImageFromAlbum:" destination="G4w-Bx-zDY" id="xj8-b9-LG7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4Cu-4l-DgI"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C7z-dz-cx9" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="0dI-NV-hIO"/>
+                            <constraint firstItem="4pG-lM-e1e" firstAttribute="top" secondItem="JnO-FQ-dAH" secondAttribute="top" id="1YR-cn-XWM"/>
+                            <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="4pG-lM-e1e" secondAttribute="bottom" id="GIH-YH-FKD"/>
+                            <constraint firstAttribute="trailing" secondItem="C7z-dz-cx9" secondAttribute="trailing" id="LEK-vd-6JX"/>
+                            <constraint firstAttribute="trailing" secondItem="4pG-lM-e1e" secondAttribute="trailing" id="Nac-r4-jUw"/>
+                            <constraint firstItem="4pG-lM-e1e" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="eIC-eX-nQH"/>
+                            <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="C7z-dz-cx9" secondAttribute="bottom" id="pUz-hI-HMg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XxT-jc-z5S">
                         <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="action" id="Jwo-Jt-qO2"/>
@@ -133,6 +166,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cameraButton" destination="0cb-xS-dzt" id="shX-XZ-dn9"/>
+                        <outlet property="memeImageView" destination="4pG-lM-e1e" id="IJw-o5-uFI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-qr-i6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
