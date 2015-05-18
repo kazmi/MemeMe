@@ -21,6 +21,9 @@ class MemeEditorViewController: UIViewController,
     // store generated memed image
     var memedImage: UIImage?
     
+    let topTextFieldDefaultText: String = "TOP"
+    let bottomTextFieldDefaultText: String = "BOTTOM"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,9 +38,11 @@ class MemeEditorViewController: UIViewController,
         
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = alignment
+        topTextField.text = topTextFieldDefaultText
 
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = alignment
+        bottomTextField.text = bottomTextFieldDefaultText
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -105,6 +110,13 @@ class MemeEditorViewController: UIViewController,
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // clear the default text when the user taps inside a textfield.
+        if (textField.text == topTextFieldDefaultText || textField.text == bottomTextFieldDefaultText) {
+            textField.text = ""
+        }
     }
     
     func subscribeToKeyboardNotification() {
