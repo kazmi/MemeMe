@@ -15,7 +15,11 @@ class MemeEditorViewController: UIViewController,
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var toolBar: UIToolbar!
     
+    // store generated memed image
+    var memedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +88,9 @@ class MemeEditorViewController: UIViewController,
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.memeImageView.image = image
+            
+            // enable share button since the Meme Editor's imageView has an image.
+            shareButton.enabled = true
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -135,6 +142,32 @@ class MemeEditorViewController: UIViewController,
         
         // reset frame position
         self.view.frame.origin.y = 0
+    }
+    
+    // MARK: - Meme Generation and Sharing
+    
+    @IBAction func share(sender: AnyObject) {
+        
+        self.memedImage = generateMemedImage()
+        let activityViewController = UIActivityViewController(activityItems: [memedImage!], applicationActivities: nil)
+        self.presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
+    func generateMemedImage() -> UIImage {
+        
+        // Hide toolbar
+        self.toolBar?.hidden = true
+        
+        // Render view to an image
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // Show toolbar
+        self.toolBar?.hidden = false
+        
+        return memedImage
     }
 
 }

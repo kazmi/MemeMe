@@ -181,7 +181,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XxT-jc-z5S">
-                        <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="action" id="Jwo-Jt-qO2"/>
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" systemItem="action" id="Jwo-Jt-qO2">
+                            <connections>
+                                <action selector="share:" destination="G4w-Bx-zDY" id="lfT-l0-974"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="F8h-YB-15d">
                             <connections>
                                 <action selector="cancel:" destination="G4w-Bx-zDY" id="bqB-FH-ENx"/>
@@ -192,6 +196,8 @@
                         <outlet property="bottomTextField" destination="Uud-wE-QRa" id="3Zs-Hd-HQm"/>
                         <outlet property="cameraButton" destination="0cb-xS-dzt" id="shX-XZ-dn9"/>
                         <outlet property="memeImageView" destination="4pG-lM-e1e" id="IJw-o5-uFI"/>
+                        <outlet property="shareButton" destination="Jwo-Jt-qO2" id="ysE-Ea-lmD"/>
+                        <outlet property="toolBar" destination="C7z-dz-cx9" id="Pfc-XL-U9Q"/>
                         <outlet property="topTextField" destination="Y2t-CC-PWM" id="s84-qg-VZX"/>
                     </connections>
                 </viewController>
