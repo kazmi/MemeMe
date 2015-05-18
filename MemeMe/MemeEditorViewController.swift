@@ -9,7 +9,7 @@
 import UIKit
 
 class MemeEditorViewController: UIViewController,
-    UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var memeImageView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
@@ -31,6 +31,7 @@ class MemeEditorViewController: UIViewController,
         
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = alignment
+
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = alignment
     }
@@ -83,6 +84,13 @@ class MemeEditorViewController: UIViewController,
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - Text Field Delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }
