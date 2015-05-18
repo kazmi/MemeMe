@@ -32,6 +32,8 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         } else {
             memesCollectionView.hidden = false
             emptyLabel.hidden = true
+            
+            memesCollectionView.reloadData()
         }
 
     }
@@ -48,7 +50,10 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
         -> UICollectionViewCell {
         
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier,
-                forIndexPath: indexPath) as! UICollectionViewCell
+                forIndexPath: indexPath) as! MemeCollectionViewCell
+            let meme = memes[indexPath.row]
+            
+            cell.memedImageView!.image = meme.memedImage
             
             return cell
     }

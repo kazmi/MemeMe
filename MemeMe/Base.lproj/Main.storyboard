@@ -217,11 +217,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qHk-eS-gIc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qHk-eS-gIc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WtO-Ur-JMB" firstAttribute="top" secondItem="qHk-eS-gIc" secondAttribute="bottom" id="DHB-ui-GIQ"/>
+                            <constraint firstAttribute="trailing" secondItem="qHk-eS-gIc" secondAttribute="trailing" id="JjX-EI-1SL"/>
+                            <constraint firstItem="qHk-eS-gIc" firstAttribute="top" secondItem="TOq-V3-BCI" secondAttribute="top" id="ZlS-m0-0ag"/>
+                            <constraint firstItem="qHk-eS-gIc" firstAttribute="leading" secondItem="TOq-V3-BCI" secondAttribute="leading" id="amq-WK-tLw"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="memedImageView" destination="qHk-eS-gIc" id="vC2-9D-miD"/>
@@ -259,7 +265,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="MZp-d0-uzG">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MemeCollectionViewCell" id="MZp-d0-uzG" customClass="MemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -272,6 +278,9 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <connections>
+                                            <outlet property="memedImageView" destination="Gso-59-tKj" id="gGK-6M-QBh"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -331,6 +340,6 @@
         <image name="table" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ghs-SF-XL8"/>
+        <segue reference="p27-Ay-fTU"/>
     </inferredMetricsTieBreakers>
 </document>
