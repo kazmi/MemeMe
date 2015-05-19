@@ -12,6 +12,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
 
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var memesTableView: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     
     var memes: [Meme]!
     
@@ -19,6 +20,9 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated);
+        
+        memesTableView.rowHeight = 132.0
+        memesTableView.estimatedRowHeight = 132.0
         
         /*
             Comment by Sulaiman Azhar on 5/17/15.
@@ -43,18 +47,29 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         memes = appDelegate.memes // shared model
 
         // check for empty state
+        hideMemeTableIfEmptyOtherwiseReloadData()
+        
+    }
+    
+    func hideMemeTableIfEmptyOtherwiseReloadData() {
+        
         if (memes.count == 0) {
+            
             memesTableView.hidden = true
             emptyLabel.hidden = false
+            
+            editButton.enabled = false
+            editButton.title = "Edit"
+            
         } else {
+            
             memesTableView.hidden = false
             emptyLabel.hidden = true
             
-            memesTableView.rowHeight = 132.0
-            memesTableView.estimatedRowHeight = 132.0
+            editButton.enabled = true
+            
             memesTableView.reloadData()
         }
-        
     }
     
     // MARK: - Table View and Data Source Delegates
@@ -95,21 +110,22 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
             // remove meme from local array
             memes.removeAtIndex(indexPath.row)
             
-            // check for empty state
-            if (memes.count == 0) {
-                memesTableView.hidden = true
-                emptyLabel.hidden = false
-            } else {
-                memesTableView.hidden = false
-                emptyLabel.hidden = true
-                
-                memesTableView.rowHeight = 132.0
-                memesTableView.estimatedRowHeight = 132.0
-                memesTableView.reloadData()
-            }
-            
             memesTableView.deleteRowsAtIndexPaths([indexPath],
                 withRowAnimation: UITableViewRowAnimation.Automatic)
+            
+            // check for empty state
+            hideMemeTableIfEmptyOtherwiseReloadData()
+        }
+    }
+    
+    @IBAction func edit(sender: AnyObject) {
+
+        if memesTableView.editing {
+            editButton.title = "Edit"
+            memesTableView.setEditing(false, animated: true)
+        } else {
+            editButton.title = "Done"
+            memesTableView.setEditing(true, animated: true)
         }
     }
 

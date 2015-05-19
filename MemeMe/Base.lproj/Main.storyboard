@@ -119,6 +119,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sent Memes" id="hlI-ne-ZtY">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Edit" id="dT5-t4-PGE">
+                            <connections>
+                                <action selector="edit:" destination="G7c-jd-OMS" id="dSb-Cb-i7v"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="AML-OT-yEM">
                             <connections>
                                 <segue destination="G4w-Bx-zDY" kind="show" id="ghs-SF-XL8"/>
@@ -126,6 +131,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="dT5-t4-PGE" id="B8N-43-4r9"/>
                         <outlet property="emptyLabel" destination="yWF-nc-Eg9" id="awq-md-01c"/>
                         <outlet property="memesTableView" destination="Y3c-1x-Kuu" id="mgY-ez-TdQ"/>
                     </connections>
