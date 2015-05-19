@@ -82,6 +82,36 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         detailController.meme = memes[indexPath.row]
         self.navigationController!.pushViewController(detailController, animated: true)
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            // remove meme from shared model
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.memes.removeAtIndex(indexPath.row)
+            
+            // remove meme from local array
+            memes.removeAtIndex(indexPath.row)
+            
+            // check for empty state
+            if (memes.count == 0) {
+                memesTableView.hidden = true
+                emptyLabel.hidden = false
+            } else {
+                memesTableView.hidden = false
+                emptyLabel.hidden = true
+                
+                memesTableView.rowHeight = 132.0
+                memesTableView.estimatedRowHeight = 132.0
+                memesTableView.reloadData()
+            }
+            
+            memesTableView.deleteRowsAtIndexPaths([indexPath],
+                withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
 
     /*
     // MARK: - Navigation
