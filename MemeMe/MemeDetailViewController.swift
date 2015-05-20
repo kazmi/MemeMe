@@ -43,6 +43,12 @@ class MemeDetailViewController: UIViewController {
         alertController.addAction(editAction)
         
         let deleteAction = UIAlertAction(title: "Delete", style: .Destructive) { (action) in
+
+            // remove meme from shared model
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.memes.removeAtIndex(self.memeIndex)
+            
+            self.navigationController?.popViewControllerAnimated(true)
         }
         alertController.addAction(deleteAction)
         
