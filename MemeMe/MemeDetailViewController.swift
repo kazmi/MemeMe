@@ -12,12 +12,15 @@ class MemeDetailViewController: UIViewController {
 
     @IBOutlet weak var memedImageView: UIImageView!
     
-    var meme: Meme!
+    var memeIndex: Int!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.hidden = true
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        var meme = appDelegate.memes[memeIndex]
         
         memedImageView.image = meme.memedImage
     }

@@ -111,7 +111,7 @@ class SentMemesCollectionViewController: UIViewController, UICollectionViewDataS
             let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController")
                 as! MemeDetailViewController
             
-            detailController.meme = memes[indexPath.row]
+            detailController.memeIndex = indexPath.row
             self.navigationController!.pushViewController(detailController, animated: true)
         } else {
             let cell = collectionView.cellForItemAtIndexPath(indexPath) as! MemeCollectionViewCell
