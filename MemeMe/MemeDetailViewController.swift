@@ -39,6 +39,8 @@ class MemeDetailViewController: UIViewController {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         
         let editAction = UIAlertAction(title: "Edit", style: .Default) { (action) in
+            
+            self.performSegueWithIdentifier("editMeme", sender: self.memeIndex)
         }
         alertController.addAction(editAction)
         
@@ -57,6 +59,15 @@ class MemeDetailViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let memeEditorViewController = segue.destinationViewController as! MemeEditorViewController
+        memeEditorViewController.editMode = true
+        memeEditorViewController.editMemeIndex = memeIndex
     }
 
 }

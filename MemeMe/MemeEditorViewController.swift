@@ -21,11 +21,26 @@ class MemeEditorViewController: UIViewController,
     // store generated memed image
     var memedImage: UIImage?
     
-    let topTextFieldDefaultText: String = "TOP"
-    let bottomTextFieldDefaultText: String = "BOTTOM"
+    var topTextFieldDefaultText: String = "TOP"
+    var bottomTextFieldDefaultText: String = "BOTTOM"
+    
+    var editMode: Bool = false
+    var editMemeIndex: Int? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if editMode {
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            var meme = appDelegate.memes[editMemeIndex!]
+            
+            topTextFieldDefaultText = meme.topText
+            bottomTextFieldDefaultText = meme.bottomText
+            memeImageView.image = meme.image
+            
+            shareButton.enabled = true
+        }
         
         let alignment: NSTextAlignment = NSTextAlignment.Center
         
@@ -207,9 +222,14 @@ class MemeEditorViewController: UIViewController,
         
         // shared model
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.memes.append(meme)
         
+        if editMode {
+            // update existing meme
+            appDelegate.memes[editMemeIndex!] = meme
+        } else {
+            // save new meme
+            appDelegate.memes.append(meme)
+        }
     }
-
 
 }

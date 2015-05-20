@@ -153,11 +153,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4pG-lM-e1e">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7z-dz-cx9">
-                                <rect key="frame" x="0.0" y="507" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="rQB-06-6oZ"/>
                                     <barButtonItem enabled="NO" systemItem="camera" id="0cb-xS-dzt">
@@ -175,7 +175,7 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-CC-PWM" userLabel="Top Text Field">
-                                <rect key="frame" x="16" y="100" width="568" height="17"/>
+                                <rect key="frame" x="16" y="40" width="568" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                 <connections>
@@ -183,7 +183,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uud-wE-QRa" userLabel="Bottom Text Field">
-                                <rect key="frame" x="16" y="455" width="568" height="17"/>
+                                <rect key="frame" x="16" y="515" width="568" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                 <connections>
@@ -201,9 +201,9 @@
                             <constraint firstAttribute="trailing" secondItem="Y2t-CC-PWM" secondAttribute="trailing" constant="16" id="JNn-rK-9U8"/>
                             <constraint firstAttribute="trailing" secondItem="C7z-dz-cx9" secondAttribute="trailing" id="LEK-vd-6JX"/>
                             <constraint firstAttribute="trailing" secondItem="4pG-lM-e1e" secondAttribute="trailing" id="Nac-r4-jUw"/>
-                            <constraint firstItem="Y2t-CC-PWM" firstAttribute="top" secondItem="3o3-yx-dTl" secondAttribute="bottom" constant="36" id="e8w-2l-gPS"/>
+                            <constraint firstItem="Y2t-CC-PWM" firstAttribute="top" secondItem="3o3-yx-dTl" secondAttribute="bottom" constant="20" id="e8w-2l-gPS"/>
                             <constraint firstItem="4pG-lM-e1e" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="eIC-eX-nQH"/>
-                            <constraint firstItem="C7z-dz-cx9" firstAttribute="top" secondItem="Uud-wE-QRa" secondAttribute="bottom" constant="35" id="eY0-iZ-bnD"/>
+                            <constraint firstItem="C7z-dz-cx9" firstAttribute="top" secondItem="Uud-wE-QRa" secondAttribute="bottom" constant="24" id="eY0-iZ-bnD"/>
                             <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="C7z-dz-cx9" secondAttribute="bottom" id="pUz-hI-HMg"/>
                             <constraint firstItem="Y2t-CC-PWM" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" constant="16" id="qpl-CV-MNh"/>
                         </constraints>
@@ -231,7 +231,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DWp-qr-i6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1429" y="-219"/>
+            <point key="canvasLocation" x="1443" y="135"/>
         </scene>
         <!--Meme Detail View Controller-->
         <scene sceneID="d30-WX-06w">
@@ -259,11 +259,12 @@
                     </view>
                     <connections>
                         <outlet property="memedImageView" destination="qHk-eS-gIc" id="vC2-9D-miD"/>
+                        <segue destination="G4w-Bx-zDY" kind="show" identifier="editMeme" id="l5k-Oo-RfO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gdu-hk-Odi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1429" y="487"/>
+            <point key="canvasLocation" x="1443" y="-619"/>
         </scene>
         <!--Sent Memes-->
         <scene sceneID="YLU-tG-vpo">
@@ -381,6 +382,6 @@
         <image name="tick" width="34" height="34"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UUo-k5-RzV"/>
+        <segue reference="l5k-Oo-RfO"/>
     </inferredMetricsTieBreakers>
 </document>
