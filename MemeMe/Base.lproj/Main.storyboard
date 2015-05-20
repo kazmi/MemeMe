@@ -303,11 +303,15 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gso-59-tKj">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="prQ-N5-lFm">
+                                                    <rect key="frame" x="50" y="50" width="50" height="50"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
                                             <outlet property="memedImageView" destination="Gso-59-tKj" id="gGK-6M-QBh"/>
+                                            <outlet property="selectedImageView" destination="prQ-N5-lFm" id="THS-x2-RJx"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -328,15 +332,23 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sent Memes" id="Gm3-za-BH5">
+                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Edit" id="q2H-Tc-cQU">
+                            <connections>
+                                <action selector="edit:" destination="RDC-ja-7nr" id="pJ9-5d-Muv"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dBe-07-42I">
                             <connections>
-                                <segue destination="G4w-Bx-zDY" kind="show" id="p27-Ay-fTU"/>
+                                <action selector="action:" destination="RDC-ja-7nr" id="n95-k6-Qsz"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="dBe-07-42I" id="luX-nZ-stK"/>
+                        <outlet property="editButton" destination="q2H-Tc-cQU" id="kyq-hI-mTF"/>
                         <outlet property="emptyLabel" destination="18j-cw-Iub" id="TG5-tx-LEL"/>
                         <outlet property="memesCollectionView" destination="7Hh-iY-VaD" id="zO9-ow-ntF"/>
+                        <segue destination="G4w-Bx-zDY" kind="show" identifier="showMemeEditor" id="UUo-k5-RzV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyg-4A-YCG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -366,8 +378,9 @@
     <resources>
         <image name="collection" width="30" height="30"/>
         <image name="table" width="30" height="30"/>
+        <image name="tick" width="34" height="34"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ghs-SF-XL8"/>
+        <segue reference="UUo-k5-RzV"/>
     </inferredMetricsTieBreakers>
 </document>
