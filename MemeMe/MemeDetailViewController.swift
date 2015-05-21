@@ -14,6 +14,8 @@ class MemeDetailViewController: UIViewController {
     
     var memeIndex: Int!
     
+    let tapGesture = UITapGestureRecognizer()
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -26,12 +28,18 @@ class MemeDetailViewController: UIViewController {
         var meme = appDelegate.memes[memeIndex]
         
         memedImageView.image = meme.memedImage
+        
+        tapGesture.addTarget(self, action: "imageTap")
+        tapGesture.numberOfTapsRequired = 1
+        memedImageView.addGestureRecognizer(tapGesture)
+        memedImageView.userInteractionEnabled = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.tabBarController?.tabBar.hidden = false
+        self.navigationController?.navigationBar.hidden = false
     }
     
     func edit() {
@@ -59,6 +67,15 @@ class MemeDetailViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func imageTap() {
+        
+        if navigationController?.navigationBarHidden == false {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
     }
     
     // MARK: - Navigation
