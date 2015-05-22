@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController,
+class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet weak var memeImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -20,6 +20,7 @@ class MemeEditorViewController: UIViewController,
     
     // store generated memed image
     var memedImage: UIImage?
+    var memeImageView = UIImageView()
     
     var topTextFieldDefaultText: String = "TOP"
     var bottomTextFieldDefaultText: String = "BOTTOM"
@@ -29,6 +30,20 @@ class MemeEditorViewController: UIViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Subscribe to the keyboard notifications, to allow the view to raise when necessary
+        self.subscribeToKeyboardNotification()
+        
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(
+            UIImagePickerControllerSourceType.Camera)
+        
+        self.tabBarController?.tabBar.hidden = true;
+        
+        scrollView.addSubview(memeImageView)
         
         if editMode {
             
@@ -37,7 +52,7 @@ class MemeEditorViewController: UIViewController,
             
             topTextFieldDefaultText = meme.topText
             bottomTextFieldDefaultText = meme.bottomText
-            memeImageView.image = meme.image
+            memedImage = meme.image
             
             shareButton.enabled = true
         }
@@ -54,22 +69,11 @@ class MemeEditorViewController: UIViewController,
         topTextField.defaultTextAttributes = memeTextAttributes
         topTextField.textAlignment = alignment
         topTextField.text = topTextFieldDefaultText
-
+        
         bottomTextField.defaultTextAttributes = memeTextAttributes
         bottomTextField.textAlignment = alignment
         bottomTextField.text = bottomTextFieldDefaultText
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Subscribe to the keyboard notifications, to allow the view to raise when necessary
-        self.subscribeToKeyboardNotification()
-        
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(
-            UIImagePickerControllerSourceType.Camera)
-        
-        self.tabBarController?.tabBar.hidden = true;
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -79,6 +83,16 @@ class MemeEditorViewController: UIViewController,
         self.unsubscribeFromKeyboardNotification()
         
         self.tabBarController?.tabBar.hidden = false;
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        adjustImage()
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        super.didRotateFromInterfaceOrientation(fromInterfaceOrientation)
+        adjustImage()
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
@@ -106,18 +120,94 @@ class MemeEditorViewController: UIViewController,
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.memeImageView.image = image
+        memedImage = info[UIImagePickerControllerOriginalImage] as? UIImage
             
-            // enable share button since the Meme Editor's imageView has an image.
-            shareButton.enabled = true
-        }
+        adjustImage()
+            
+        // enable share button since the Meme Editor's imageView has an image.
+        shareButton.enabled = true
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    /*
+        Comment by Sulaiman Azhar on 5/22/15.
+    
+        The adjustImage and centerScrollViewContents methods are implemented to be used
+        along with a UIScrollView to provide panning and zooming proportionally inorder to
+        exceed the specification, as opposed to simply using an UIImageView with content 
+        mode set to AspectFil.
+    
+        In order to implement this feature, I took help from the following resources,
+    
+        [1] https://developer.apple.com/library/ios/samplecode/PhotoScroller/Introduction/Intro.html
+        [2] http://stackoverflow.com/questions/794294/how-do-i-center-a-uiimageview-within-a-full-screen-uiscrollview
+        [3] http://discussions.udacity.com/t/l6-looking-for-tips-on-usage-of-uiimageview-with-uiscrollview/14800/2
+    
+    */
+    
+    func adjustImage() {
+        
+        if let image = memedImage {
+            
+            memeImageView.removeFromSuperview()
+            
+            memeImageView = UIImageView()
+            memeImageView.bounds = scrollView.bounds
+            memeImageView.frame = CGRectMake(0, 0, scrollView.frame.width, scrollView.frame.height)
+            
+            scrollView.addSubview(memeImageView)
+            
+            memeImageView.image = image
+            memeImageView.contentMode = UIViewContentMode.Center
+            memeImageView.frame = CGRectMake(0, 0, image.size.width, image.size.height)
+            
+            scrollView.contentSize = image.size
+            
+            let scrollViewFrame = scrollView.frame
+            let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
+            let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
+            let minScale = min(scaleHeight, scaleWidth)
+            
+            scrollView.minimumZoomScale = minScale
+            scrollView.maximumZoomScale = 1
+            scrollView.zoomScale = minScale
+            
+            centerScrollViewContents()
+        }
+    }
+    
+    func centerScrollViewContents() {
+        let boundSize = scrollView.bounds.size
+        
+        var contentsFrame = memeImageView.frame
+        if contentsFrame.size.width < boundSize.width {
+            contentsFrame.origin.x = (boundSize.width - contentsFrame.size.width) / 2
+        } else {
+            contentsFrame.origin.x = 0
+        }
+        
+        if contentsFrame.size.height < boundSize.height {
+            contentsFrame.origin.y = (boundSize.height - contentsFrame.size.height) / 2
+        } else {
+            contentsFrame.origin.y = 0
+        }
+        
+        memeImageView.frame = contentsFrame
+    }
+    
+    // MARK: - Scroll View Delegate
+    
+    func scrollViewDidZoom(scrollView: UIScrollView) {
+        centerScrollViewContents()
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return memeImageView
     }
     
     // MARK: - Text Field Delegate and Notifications

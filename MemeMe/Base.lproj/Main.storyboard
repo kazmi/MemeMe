@@ -143,7 +143,7 @@
         <!--Meme Editor View Controller-->
         <scene sceneID="cK0-t0-5kD">
             <objects>
-                <viewController id="G4w-Bx-zDY" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="G4w-Bx-zDY" customClass="MemeEditorViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3o3-yx-dTl"/>
                         <viewControllerLayoutGuide type="bottom" id="FmT-NR-DGn"/>
@@ -152,10 +152,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4pG-lM-e1e">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="F0Z-qU-ZSg">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
+                                <color key="backgroundColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="G4w-Bx-zDY" id="nVM-lm-22b"/>
+                                </connections>
+                            </scrollView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C7z-dz-cx9">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
@@ -194,18 +197,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="C7z-dz-cx9" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="0dI-NV-hIO"/>
-                            <constraint firstItem="4pG-lM-e1e" firstAttribute="top" secondItem="JnO-FQ-dAH" secondAttribute="top" id="1YR-cn-XWM"/>
                             <constraint firstItem="Uud-wE-QRa" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" constant="16" id="6cq-OM-RDp"/>
                             <constraint firstAttribute="trailing" secondItem="Uud-wE-QRa" secondAttribute="trailing" constant="16" id="BGV-rL-0Tq"/>
-                            <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="4pG-lM-e1e" secondAttribute="bottom" id="GIH-YH-FKD"/>
                             <constraint firstAttribute="trailing" secondItem="Y2t-CC-PWM" secondAttribute="trailing" constant="16" id="JNn-rK-9U8"/>
                             <constraint firstAttribute="trailing" secondItem="C7z-dz-cx9" secondAttribute="trailing" id="LEK-vd-6JX"/>
-                            <constraint firstAttribute="trailing" secondItem="4pG-lM-e1e" secondAttribute="trailing" id="Nac-r4-jUw"/>
+                            <constraint firstAttribute="trailing" secondItem="F0Z-qU-ZSg" secondAttribute="trailing" id="a62-bm-lJI"/>
                             <constraint firstItem="Y2t-CC-PWM" firstAttribute="top" secondItem="3o3-yx-dTl" secondAttribute="bottom" constant="20" id="e8w-2l-gPS"/>
-                            <constraint firstItem="4pG-lM-e1e" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="eIC-eX-nQH"/>
                             <constraint firstItem="C7z-dz-cx9" firstAttribute="top" secondItem="Uud-wE-QRa" secondAttribute="bottom" constant="24" id="eY0-iZ-bnD"/>
+                            <constraint firstItem="F0Z-qU-ZSg" firstAttribute="top" secondItem="JnO-FQ-dAH" secondAttribute="top" id="gcD-aV-5Lo"/>
                             <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="C7z-dz-cx9" secondAttribute="bottom" id="pUz-hI-HMg"/>
                             <constraint firstItem="Y2t-CC-PWM" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" constant="16" id="qpl-CV-MNh"/>
+                            <constraint firstItem="FmT-NR-DGn" firstAttribute="top" secondItem="F0Z-qU-ZSg" secondAttribute="bottom" id="s2O-Mf-MGk"/>
+                            <constraint firstItem="F0Z-qU-ZSg" firstAttribute="leading" secondItem="JnO-FQ-dAH" secondAttribute="leading" id="zz4-80-mWi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XxT-jc-z5S">
@@ -223,7 +226,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="Uud-wE-QRa" id="3Zs-Hd-HQm"/>
                         <outlet property="cameraButton" destination="0cb-xS-dzt" id="shX-XZ-dn9"/>
-                        <outlet property="memeImageView" destination="4pG-lM-e1e" id="IJw-o5-uFI"/>
+                        <outlet property="scrollView" destination="F0Z-qU-ZSg" id="TGh-PU-OQA"/>
                         <outlet property="shareButton" destination="Jwo-Jt-qO2" id="ysE-Ea-lmD"/>
                         <outlet property="toolBar" destination="C7z-dz-cx9" id="Pfc-XL-U9Q"/>
                         <outlet property="topTextField" destination="Y2t-CC-PWM" id="s84-qg-VZX"/>
