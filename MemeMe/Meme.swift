@@ -22,7 +22,8 @@ import UIKit
     let meme = Meme(topText: ...,
                     bottomText: ...,
                     image: ...,
-                    memedImage: ...)
+                    memedImage: ...,
+                    font: ...)
 
     An array of sent memes is maintained in the AppDelegate.swift
 
@@ -33,4 +34,5 @@ struct Meme {
     var bottomText : String
     var image : UIImage
     var memedImage : UIImage
+    var font: String
 }

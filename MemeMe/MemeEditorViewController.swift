@@ -25,6 +25,9 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     var topTextFieldDefaultText: String = "TOP"
     var bottomTextFieldDefaultText: String = "BOTTOM"
     
+    // default font
+    var font: String = "Impact"
+    
     var editMode: Bool = false
     var editMemeIndex: Int? = nil
     
@@ -53,26 +56,12 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
             topTextFieldDefaultText = meme.topText
             bottomTextFieldDefaultText = meme.bottomText
             memedImage = meme.image
+            font = meme.font
             
             shareButton.enabled = true
         }
         
-        let alignment: NSTextAlignment = NSTextAlignment.Center
-        
-        let memeTextAttributes = [
-            NSStrokeColorAttributeName: UIColor.blackColor(),
-            NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName: UIFont(name: "Impact", size: 40)!,
-            NSStrokeWidthAttributeName: -3.0
-        ]
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.textAlignment = alignment
-        topTextField.text = topTextFieldDefaultText
-        
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.textAlignment = alignment
-        bottomTextField.text = bottomTextFieldDefaultText
+        configFont()
 
     }
     
@@ -96,6 +85,52 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     
     @IBAction func cancel(sender: UIBarButtonItem) {
         self.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    // MARK: - Font
+    
+    func configFont() {
+        
+        let memeTextAttributes = [
+            NSStrokeColorAttributeName: UIColor.blackColor(),
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont(name: self.font, size: 40)!,
+            NSStrokeWidthAttributeName: -3.0
+        ]
+        
+        self.topTextField.defaultTextAttributes = memeTextAttributes
+        self.topTextField.textAlignment = NSTextAlignment.Center
+        self.topTextField.text = topTextFieldDefaultText
+            
+        self.bottomTextField.defaultTextAttributes = memeTextAttributes
+        self.bottomTextField.textAlignment = NSTextAlignment.Center
+        self.bottomTextField.text = bottomTextFieldDefaultText
+    }
+    
+    @IBAction func pickFont(sender: AnyObject) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let impactFontAction = UIAlertAction(title: "Impact", style: .Default) { (action) in
+            
+            self.font = "Impact"
+            self.configFont()
+            
+        }
+        alertController.addAction(impactFontAction)
+        
+        let HelveticaNeueAction = UIAlertAction(title: "HelveticaNeue", style: .Default) { (action) in
+            
+            self.font = "HelveticaNeue-CondensedBlack"
+            self.configFont()
+
+        }
+        alertController.addAction(HelveticaNeueAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+        }
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Pick An Image
@@ -315,7 +350,8 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         var meme = Meme(topText: topTextField.text,
             bottomText: bottomTextField.text,
             image: memeImageView.image!,
-            memedImage: memedImage!)
+            memedImage: memedImage!,
+            font: font)
         
         // shared model
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
