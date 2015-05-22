@@ -35,4 +35,8 @@ struct Meme {
     var image : UIImage
     var memedImage : UIImage
     var font: String
+    
+    func summary() -> String {
+        return prefix(topText, 6) + "..." + suffix(bottomText, 6)
+    }
 }

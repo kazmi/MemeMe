@@ -85,7 +85,7 @@ class SentMemesTableViewController: UIViewController, UITableViewDataSource, UIT
         let meme = memes[indexPath.row]
         
         cell.memedImageView?.image = meme.memedImage
-        cell.memeTextLabel?.text = meme.topText + "..." + meme.bottomText
+        cell.memeTextLabel?.text = meme.summary()
         
         return cell
     }
