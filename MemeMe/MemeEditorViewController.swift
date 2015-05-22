@@ -17,6 +17,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var scaleButton: UIBarButtonItem!
     
     // store generated memed image
     var memedImage: UIImage?
@@ -30,6 +31,8 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     
     var editMode: Bool = false
     var editMemeIndex: Int? = nil
+    
+    var scaleMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         self.tabBarController?.tabBar.hidden = true;
         
         scrollView.addSubview(memeImageView)
+        scrollView.userInteractionEnabled = false
         
         if editMode {
             
@@ -59,6 +63,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
             font = meme.font
             
             shareButton.enabled = true
+            scaleButton.enabled = true
         }
         
         configFont()
@@ -161,6 +166,9 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         // enable share button since the Meme Editor's imageView has an image.
         shareButton.enabled = true
         
+        // enable scale mode
+        scaleButton.enabled = true
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -232,6 +240,26 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         }
         
         memeImageView.frame = contentsFrame
+    }
+    
+    @IBAction func scale(sender: AnyObject) {
+        
+        scaleMode = !scaleMode
+        
+        if (scaleMode == true) {
+            scaleButton.title = "Done"
+            shareButton.enabled = false
+            topTextField.hidden = true
+            bottomTextField.hidden = true
+            scrollView.userInteractionEnabled = true
+        } else {
+            scaleButton.title = "Scale"
+            shareButton.enabled = true
+            topTextField.hidden = false
+            bottomTextField.hidden = false
+            scrollView.userInteractionEnabled = false
+        }
+        
     }
     
     // MARK: - Scroll View Delegate

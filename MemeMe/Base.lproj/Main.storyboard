@@ -181,6 +181,12 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yH0-ns-PkR"/>
+                                    <barButtonItem enabled="NO" title="Scale" id="cml-LG-lnO">
+                                        <connections>
+                                            <action selector="scale:" destination="G4w-Bx-zDY" id="LhQ-ZI-67d"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="jyI-Sa-qkX"/>
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="TOP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y2t-CC-PWM" userLabel="Top Text Field">
@@ -232,6 +238,7 @@
                     <connections>
                         <outlet property="bottomTextField" destination="Uud-wE-QRa" id="3Zs-Hd-HQm"/>
                         <outlet property="cameraButton" destination="0cb-xS-dzt" id="shX-XZ-dn9"/>
+                        <outlet property="scaleButton" destination="cml-LG-lnO" id="QQ6-EA-9sN"/>
                         <outlet property="scrollView" destination="F0Z-qU-ZSg" id="TGh-PU-OQA"/>
                         <outlet property="shareButton" destination="Jwo-Jt-qO2" id="ysE-Ea-lmD"/>
                         <outlet property="toolBar" destination="C7z-dz-cx9" id="Pfc-XL-U9Q"/>
