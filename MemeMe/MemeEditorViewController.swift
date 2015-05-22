@@ -90,8 +90,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         adjustImage()
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
-        super.didRotateFromInterfaceOrientation(fromInterfaceOrientation)
+    func orientationChanged() {
         adjustImage()
     }
     
@@ -239,6 +238,10 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide",
             name: UIKeyboardWillHideNotification, object: nil)
+        
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged",
+            name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     func unsubscribeFromKeyboardNotification() {
@@ -246,6 +249,10 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification,
+            object: nil)
+        UIDevice.currentDevice().endGeneratingDeviceOrientationNotifications()
     }
     
     // Move the view when the keyboard covers the text field
