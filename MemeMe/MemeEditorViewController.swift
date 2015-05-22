@@ -105,11 +105,9 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         
         self.topTextField.defaultTextAttributes = memeTextAttributes
         self.topTextField.textAlignment = NSTextAlignment.Center
-        self.topTextField.text = topTextFieldDefaultText
             
         self.bottomTextField.defaultTextAttributes = memeTextAttributes
         self.bottomTextField.textAlignment = NSTextAlignment.Center
-        self.bottomTextField.text = bottomTextFieldDefaultText
     }
     
     @IBAction func pickFont(sender: AnyObject) {
