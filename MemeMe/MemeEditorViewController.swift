@@ -42,7 +42,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         super.viewWillAppear(animated)
         
         // Subscribe to the keyboard notifications, to allow the view to raise when necessary
-        self.subscribeToKeyboardNotification()
+        self.subscribeToNotifications()
         
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.Camera)
@@ -74,7 +74,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         super.viewWillDisappear(animated)
         
         // Unsubscribe from the keyboard notifications.
-        self.unsubscribeFromKeyboardNotification()
+        self.unsubscribeFromNotifications()
         
         self.tabBarController?.tabBar.hidden = false;
     }
@@ -273,14 +273,6 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     // MARK: - Text Field Delegate and Notifications
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField.text == "") {
-            if textField == topTextField {
-                textField.text = topTextFieldDefaultText
-            } else {
-                textField.text = bottomTextFieldDefaultText
-            }
-        }
-        
         textField.resignFirstResponder()
         return true
     }
@@ -292,7 +284,17 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
         }
     }
     
-    func subscribeToKeyboardNotification() {
+    func textFieldDidEndEditing(textField: UITextField) {
+        if (textField.text == "") {
+            if textField == topTextField {
+                textField.text = topTextFieldDefaultText
+            } else {
+                textField.text = bottomTextFieldDefaultText
+            }
+        }
+    }
+    
+    func subscribeToNotifications() {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:",
             name: UIKeyboardWillShowNotification, object: nil)
@@ -305,7 +307,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
             name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
-    func unsubscribeFromKeyboardNotification() {
+    func unsubscribeFromNotifications() {
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
         
@@ -320,7 +322,7 @@ class MemeEditorViewController: UIViewController, UIScrollViewDelegate,
     func keyboardWillShow(notification: NSNotification) {
         
         if (self.bottomTextField.isFirstResponder()) {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            self.view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
     
